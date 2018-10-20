@@ -1,3 +1,59 @@
-/* body {
-    background-image: url('../images/hangman.jpg');
-} */
+body {
+
+    max-width: 100%;
+    color: white;
+    width: 980px;
+    margin: auto;
+
+}
+
+
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.text-center {
+    line-height: 60px;
+    color: white;
+    margin-left: 5%;
+
+}
+.col-6 {
+    color: white;
+}
+.row {
+    margin: 0% 10%;
+}
+
+#start {
+    font-size: 36px;
+}
+
+
+#welcome {
+    color: aqua;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 110px;
+    margin-left: 5%;
+
+}
+#era2000s {
+font-family: 'Orbitron', sans-serif;
+color: hotpink;
+font-size: 110px;
+margin-left: 5%;
+}
+

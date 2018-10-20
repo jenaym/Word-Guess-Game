@@ -4,8 +4,8 @@
 
 var wordArray = [
 "christina aguilera", "usher", "beyonce", "eminem", "britney spears", "chris brown"
-]
-var wins = 0;
+];
+var wins = 0;               
 var randomWord;             //Word 
 var splitWordArray = [];    //Letters in Word
 var wordIP = [];            //word we are building
@@ -13,6 +13,9 @@ var guess;                  // Users Guess
 var allGuessesArray = [];   //stores letters guessed
 var remainingGuesses = 10;
 var gameFinished = false;
+var songTitle;
+
+
 
 var audioBeyonce = document.createElement("audio");
 audioBeyonce.setAttribute("src", "assets/beyonce-Listen.mp3");
@@ -36,6 +39,7 @@ audioChrisBrown.setAttribute("src", "assets/chrisBrown-kissKiss.mp3");
 
 //Functions //
 
+
 function pauseAudio() {
         audioBeyonce.pause();
         audioBritney.pause();
@@ -45,26 +49,34 @@ function pauseAudio() {
         audioChrisBrown.pause();
 };
 
+//Play Audio of winning word & Display song title and artist
 function playAudio() {
     if (randomWord === "beyonce") {
         audioBeyonce.play();
+        songTitle = "Listen by Beyoncé";
     }
     else if (randomWord === "christina aguilera") {
         audioChristina.play();
+        songTitle = "Beautiful by Christina Aguilera";
     }
     else if (randomWord === "britney spears") {
         audioBritney.play();
+        songTitle = "Stronger by Britney Spears";
     }
     else if (randomWord === "usher") {
         audioUsher.play();
+        songTitle = "Love In The Club by Usher";
     }
     else if (randomWord === "eminem") {
         audioEminem.play();
+        songTitle =  "Lose Yourself by Eminem";
     }
     else if (randomWord === "chris brown") {
         audioChrisBrown.play();
+        songTitle = "Kiss Kiss by Chris Brown";
     }        
 };
+
 
 function start() {
 
@@ -76,7 +88,6 @@ function start() {
         splitWordArray = randomWord.split("");
         console.log(splitWordArray);
     
-    
     for (var i = 0; i < splitWordArray.length; i++) {
         if (splitWordArray[i] === " ") {
             wordIP.push(" ");
@@ -87,10 +98,11 @@ function start() {
     }
 
     //Call UpdateDisplay function
-    updateDisplay();
+        updateDisplay();
     
 };
 
+//Reset game variables
 function reset() {
 
     allGuessesArray = [];
@@ -98,10 +110,9 @@ function reset() {
     remainingGuesses = 10;
 
     start();
-
 }; 
 
-
+//Updating game display
 function updateDisplay() {
 
     var wordIPText = "";
@@ -113,9 +124,10 @@ function updateDisplay() {
     document.getElementById("wordIP").innerText = wordIPText;
     document.getElementById("remainingGuesses").innerText = remainingGuesses;
     document.getElementById("lettersGuessed").innerText = allGuessesArray;
+    document.getElementById("song").innerHTML = songTitle;
 };
 
-
+//Check user guess 
 function checkLetter(guess) {
 
     var positions = [];
@@ -136,6 +148,7 @@ function checkLetter(guess) {
     }
 };
 
+//Check if letter has already been guessed
 function checkGuess(guess) {
 
     if (remainingGuesses > 0) {
@@ -146,12 +159,15 @@ function checkGuess(guess) {
     }
 };
 
+//Check if the user won or loss
 function checkResult() {
     if (wordIP.indexOf("_ ") === -1) {
         console.log("you win!");
         wins = wins + 1;
         pauseAudio();
         playAudio();
+        $(".pause-button").show();
+        $("#song").show();
         reset();
     }
 
@@ -164,10 +180,15 @@ function checkResult() {
 
 $(document).ready(function() {
     start();
+ 
+    //Start with Pause Button and song title hidden
+    $(".pause-button").hide();
+    $("#song").hide();
 
     $(".pause-button").click(function() {
         pauseAudio();
     });
+
     
 });
 
